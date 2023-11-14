@@ -1,8 +1,9 @@
 const { Server } = require("socket.io");
 const PORT = process.env.PORT || 8000;
+console.log("process.env.clientUrl", process.env.clientUrl);
 const io = new Server(PORT, {
   cors: {
-    origin: ["http://localhost:3000", process.env.clientUrl],
+    origin: ["http://localhost:3000", "https://chat-app-next-phi.vercel.app"],
   },
 });
 
