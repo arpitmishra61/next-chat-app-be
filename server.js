@@ -16,4 +16,11 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     cb();
   });
+  socket.on("typing", (data, room) => {
+    socket.to(room).emit("typing-event", { ...data, value: true });
+  });
+
+  socket.on("not-typing", (data, room) => {
+    socket.to(room).emit("typing-event", { ...data, value: false });
+  });
 });
