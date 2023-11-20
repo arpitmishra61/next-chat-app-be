@@ -12,9 +12,11 @@ io.on("connection", (socket) => {
   socket.on("message", (message, room) => {
     if (room) socket.to(room).emit("receive-message", message);
   });
-  socket.on("join-room", (roomId, cb) => {
+  socket.on("join-room", (data, roomId) => {
     socket.join(roomId);
-    cb();
+    socket
+      .to(roomId)
+      .emit("person-joined", { ...data, text: "Joined The Chat!!!" });
   });
   socket.on("typing", (data, room) => {
     socket.to(room).emit("typing-event", { ...data, value: true });
